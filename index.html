@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Reason for Learning</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- to input the font -->
+    <link rel="stylesheet" href="font-awesome-4.1.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+    <link href="css/main.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="css/colors/blue.css">
+    <script src="js/modernizr-2.6.2.min.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900,300italic,400italic,600italic,700italic,900italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Oxygen:400,700' rel='stylesheet' type='text/css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+</head>
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 50%;
+	font-size: 20px
+    }
+
+    td, th {
+        border: 1px solid #000000;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+</style>
+
+<body>
+<section id ="page-welcome" class="page-welcome">
+    
+    <div id ="container">
+        <div class="row">
+            <header class="centered">
+                <a href="/" style="color:rgb(0,0,0)"> <h1>Welcome</h1></a>
+                <h3>Reasons for Learning</h3>
+            </header>
+        </div>
+    </div><!-- row ends -->
+    </div>
+    <a href="#page-profile" class="btn btn-default hire-me"> Let's Begin Journey</a>
+</section> <!-- section ends -->
+
+<section id="page-profile" class="page-profile">
+    <div class="container">
+        <header class="section-header">
+            <h2 class="section-title">Experiment</h2>
+            <p> Get ready for a visual, auditory and kinesthetic journey.</p>
+        </header>
+        <br><br> <br> <br>
+        <div class="row">
+            <label> Select subject of Experiment</label>
+            <br/> <br/>
+
+            <form>
+                <div class="col-md-4">
+                    <input type="radio" name="subject" value="Chemistry" onchange="showHideDiv()" checked> Chemistry<br>
+                    </div>
+                <div class="col-md-4">
+                    <input type="radio" name="subject" value="Physics" onchange="showHideDiv()"> Physics<br>
+                </div>
+                <div class="col-md-4">
+                    <input type="radio" name="subject" value="Mathematics" onchange="showHideDiv()"> Mathematics
+                </div>
+            </form>
+        </div>
+        <br><br> <br>
+        <div class="row" style="display:None" id="physics-value">
+            <label> Select type of Experiment</label>
+            <br/> <br/>
+            <form>
+                <div class="col-md-4" id = "physics-acceleration" >
+                    <input type="radio" name="exp_type" value="Pressure"> Pressure<br>
+                </div>
+                <div class="col-md-4" id = "physics-pressure">
+                    <input type="radio" name="exp_type" value="Acceleration" checked > Acceleration<br>
+                </div>
+                <div class="col-md-4" id = "physics-heat" >
+                    <input type="radio" name="exp_type" value="Heat"> Heat
+                </div>
+            </form>
+            <br> <br> <br> <br>
+            <div class="col-md-4"></div>
+            <div class="col-md-4" >
+                <a href="#page-skills"><input type="button" name="perform" value="Perform Experiment"></a>
+            </div>
+        </div>
+    </div>
+</section><!-- experiment ends -->
+
+<section id="page-skills" class="page-skills">
+    <div class="container">
+
+        <header class="section-header">
+            <h2 class="section-title"><span>Pressure Experiment</span></h2>
+	    <h4 class="section-subtitle">Get Data collected by Sensor</h4>
+
+        </header>
+        <br><br>
+	<div class="row">
+		<img src="pressure.jpeg" alt="Mountain View" style="width:304px;height:228px;">
+	</div>
+	<br><br>
+	
+        <div class="row">
+            <form>
+                <div class="col-md-4"> <label>Enter the Weight </label>	&nbsp  &nbsp  &nbsp  &nbsp &nbsp  &nbsp  &nbsp	    
+			<input class="textBox" id="weight" type="text" maxlength="30" required/>
+		</div>
+                <div class="col-md-1">
+		    
+
+                    <input type="button" value="Calibrate" onclick="tableCreate()"> 
+		</div>
+		<div class="col-md-6">
+                    <input type="button" value="Experiment Data" onclick="insert()">
+		</div>
+            </form>
+        </div>
+	<br>
+	<div class="row">
+		<div class="col-md-1"></div>
+		<div class="col-md-4">
+			<table id ="display_data"></table>
+		</div>
+		<div class="col-md-2"></div>
+		<div class="col-md-4">
+			<table id ="pressure_data"></table>
+		</div>
+	</div>
+        <br><br><br><br>
+
+    </div>
+</section><!-- skills ends -->
+
+<script>
+    function showHideDiv()  {
+        if(document.getElementsByName('subject')[1].checked) {
+            document.getElementById('physics-value').style.display = "block"
+        } else {
+            document.getElementById('physics-value').style.display = "none"
+        }
+    }
+</script>
+<script>
+    var result = "dada"
+    function getData() {
+        $.get("https://dweet.io/get/latest/dweet/for/garvit-dweet", "jsonp", function(data, status){
+            console.log("Data: " + JSON.stringify(data.with[0].content.air_pressure) + "\nStatus: " + status);
+            result = JSON.stringify(data.with[0].content.air_pressure)
+        })
+        console.log(result)
+    }
+
+</script>
+<script>
+var cnt = 0;
+    function insert() {
+	
+        var body = document.getElementsByTagName('section')['page-skills'];
+        var tbl = document.getElementById('pressure_data');
+        tbl.style.width = '100%';
+        tbl.setAttribute('border', '1');
+        tbl.align = 'right';
+        tbl.style.align = 'right'
+        var tbdy = document.createElement('tbody');
+        tbdy.setAttribute('id', 'pressure_tbdy');
+	if (cnt == 0) {
+		var tr = document.createElement('tr');
+		var th_pressure = document.createElement('th');
+		var th_value = document.createElement('th');
+		th_pressure.appendChild(document.createTextNode('Pressure Value'))
+		th_value.appendChild(document.createTextNode('Approx Weight'))
+		tr.appendChild(th_pressure)        
+		tr.appendChild(th_value)
+		tbdy.appendChild(tr);
+	}
+        
+            var tr = document.createElement('tr');
+            var td = document.createElement('td');
+	    var result;
+             $.get("https://dweet.io/get/latest/dweet/for/garvit-dweet", "jsonp", function(data, status){
+                        result = JSON.stringify(data.with[0].content.air_pressure)
+                        td.appendChild(document.createTextNode(result));
+
+                    console.log(result)
+		    tr.appendChild(td);
+		    var td1 = document.createElement('td');
+		    var calibrated_pressure = parseFloat(document.getElementById('calibrated_value').innerText)
+		    var calibrated_weight = parseFloat(document.getElementById('weight').value)
+		    var weight = (result*calibrated_weight)/calibrated_pressure
+		    td1.appendChild(document.createTextNode(weight.toFixed(2)));
+		    tr.appendChild(td1);
+		})
+            tbdy.appendChild(tr);
+        
+        tbl.appendChild(tbdy);
+	cnt=parseInt(cnt)+parseInt(1)
+    }
+</script>
+
+<script>
+    function tableCreate() {
+	if(document.getElementById('weight').value == '') {
+		alert('Oops. Enter the Weight for Calibiration!!');
+	} else {
+
+		var tbl = document.getElementById('display_data');
+		tbl.style.width = '100%';
+		tbl.setAttribute('border', '1');
+		tbl.align = 'left';
+		tbl.style.align = 'left'
+		var tbdy = document.createElement('tbody');
+		tbdy.setAttribute('id', 'table_tbdy');
+		var tr = document.createElement('tr');
+		var th_pressure = document.createElement('th');
+		var th_value = document.createElement('th');
+		th_pressure.appendChild(document.createTextNode('Pressure Value'))
+		th_value.appendChild(document.createTextNode('Calibrated Weight'))
+		tr.appendChild(th_value)
+		tr.appendChild(th_pressure)
+		tbdy.appendChild(tr);
+		for (var i = 0; i < 1; i++) {
+		    var tr = document.createElement('tr');
+		    for (var j = 0; j < 2; j++) {
+		        var td = document.createElement('td');
+		        if (j == 1) {
+		            $.get("https://dweet.io/get/latest/dweet/for/garvit-dweet", "jsonp", function(data, status){
+		                console.log("Data: " + JSON.stringify(data.with[0].content.air_pressure) + "\nStatus: " + status);
+		                result = JSON.stringify(data.with[0].content.air_pressure)
+				td.setAttribute('id','calibrated_value')
+		                console.log(result)
+		                td.appendChild(document.createTextNode(result));
+
+		            })
+		        } else {
+		            td.appendChild(document.createTextNode(document.getElementById('weight').value));
+		        }
+		        tr.appendChild(td);
+		    }
+		    tbdy.appendChild(tr);
+		}
+		tbl.appendChild(tbdy);
+		body.appendChild(tbl)
+		body.appendChild(document.createElement('br'))
+		body.appendChild(document.createElement('br'))
+		body.appendChild(document.createElement('br'))
+		body.appendChild(document.createElement('br'))
+	}
+    }
+</script>
+
+<script src="js/jquery-1.10.2.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.scrollTo.js"></script>
+<script src="js/jquery.nav.js"></script>
+<script src="js/jquery.sticky.js"></script>
+<script src="js/jquery.easypiechart.min.js"></script>
+<script src="js/jquery.vegas.min.js"></script>
+<script src="js/jquery.isotope.min.js"></script>
+<script src="js/jquery.magnific-popup.min.js"></script>
+<script src="js/jquery.validate.js"></script>
+<script src="js/waypoints.min.js"></script>
+<script src="js/main.js"></script>
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-46627904-1', 'authenticgoods.co');
+    ga('send', 'pageview');
+
+</script>
+
+</body>
+</html>
