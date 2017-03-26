@@ -118,7 +118,7 @@
 	
         <div class="row">
             <form>
-                <div class="col-md-4"> <label>Enter the Weight </label>	&nbsp  &nbsp  &nbsp  &nbsp &nbsp  &nbsp  &nbsp	    
+                <div class="col-md-4"> <label><font size=4px>Enter the Weight</font> </label>	&nbsp  &nbsp  &nbsp  &nbsp &nbsp  &nbsp  &nbsp	    
 			<input class="textBox" id="weight" type="text" maxlength="30" required/>
 		</div>
                 <div class="col-md-1">
@@ -202,7 +202,7 @@ var cnt = 0;
 		    var td1 = document.createElement('td');
 		    var calibrated_pressure = parseFloat(document.getElementById('calibrated_value').innerText)
 		    var calibrated_weight = parseFloat(document.getElementById('weight').value)
-		    var weight = (result*calibrated_weight)/calibrated_pressure
+		    var weight = (result-calibrated_pressure)*67+calibrated_weight
 		    td1.appendChild(document.createTextNode(weight.toFixed(2)));
 		    tr.appendChild(td1);
 		})
